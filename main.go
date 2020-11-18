@@ -5,19 +5,19 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/p3lli/hello-again-go/config"
-
-	"github.com/labstack/echo/v4"
+	"hello-again-go/config"
+	"hello-again-go/handler"
 )
 
 func main() {
-	config, err = config.LoadConfig()
+	conf, err := config.LoadConfig()
 	if err != nil {
-		log.Fatalf("Error during env var loading: %s", err.Error)
+		log.Fatalf("Error during env var loading: %s", err.Error())
 	}
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World! (...orld! ...rld! ... ld!)")
-	})
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.Port)))
+	handler, err := handler.NewRequestHandler(*conf)
+	if err != nil {
+		log.Fatalf("Error during handler initialization: %s", err.Error())
+	}
+	http.HandleFunc("/image", handler.RespondImage)
+	http.ListenAndServe(fmt.Sprintf(":%s", conf.Port), nil)
 }
