@@ -9,5 +9,21 @@ Removing the rust...
 Let's try to build a simple API REST Endpoint: A single GET with a text query param.  
 As a result, it will return a .png image containing the value of the queryparam.  
 
-I am going to use [`net/http`] as a very simplistic web framework and [`gg`](https://github.com/fogleman/gg) to create the .png  
+I am going to use `net/http` as a very simplistic web framework and [`gg`](https://github.com/fogleman/gg) to create the .png  
 
+#### Test
+
+```
+go test ./...
+```
+
+#### Run
+
+```
+go run main.go
+```
+
+Try:
+```
+curl "http://localhost:8080/image?text=go"
+```
