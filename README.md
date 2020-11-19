@@ -27,5 +27,3 @@ Try:
 ```
 curl -O "http://localhost:8080/image?text=go" > go.png
 ```
-
-![Go text](/go.png)
