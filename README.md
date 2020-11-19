@@ -25,5 +25,7 @@ go run main.go
 
 Try:
 ```
-curl -O "http://localhost:8080/image?text=go" > go.png
+curl "http://localhost:8080/image?text=go" --output go.png
 ```
+
+![Go image](go.png)
