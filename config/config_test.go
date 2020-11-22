@@ -2,7 +2,7 @@ package config
 
 import "testing"
 
-func LoadConfigTest(t *testing.T) {
+func TestLoadConfig(t *testing.T) {
 	config, err := LoadConfig()
 	if err != nil {
 		t.Errorf(
