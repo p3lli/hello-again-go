@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"hello-again-go/config"
 	"hello-again-go/service/draw"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -46,7 +47,11 @@ func NewRequestHandler(conf config.Config) (RequestHandler, error) {
 // RespondImage return an image as response
 func (r HTTPRequestHandler) RespondImage(w http.ResponseWriter, req *http.Request) {
 	query := req.URL.Query()
-	text, _ := query["text"]
+	text, ok := query["text"]
+	if !ok {
+		log.Print(fmt.Errorf("Query param 'text' not provided"))
+		return
+	}
 	img, err := r.drawer.DrawText(strings.Join(text, ""))
 	if err != nil {
 		panic(err)

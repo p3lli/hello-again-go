@@ -21,5 +21,7 @@ func main() {
 	}
 	http.HandleFunc("/image", handler.RespondImage)
 	log.Print("System ready! Waiting instructions...")
-	http.ListenAndServe(fmt.Sprintf(":%s", conf.Port), nil)
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", conf.Port), nil); err != nil {
+		log.Fatalf("Error during server starting: %s", err.Error())
+	}
 }

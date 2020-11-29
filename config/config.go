@@ -19,7 +19,7 @@ type ContentType string
 // Content types
 const (
 	PNG             ContentType = "image/png"
-	MOCKCONTENTTYPE             = "mock"
+	MOCKCONTENTTYPE ContentType = "mock"
 )
 
 // DrawerType custom type for drawer type
@@ -28,7 +28,7 @@ type DrawerType string
 // Available service type
 const (
 	GGDRAWER   DrawerType = "gg"
-	MOCKDRAWER            = "mockDrawer"
+	MOCKDRAWER DrawerType = "mockDrawer"
 )
 
 // Config application container
