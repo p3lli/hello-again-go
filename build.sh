@@ -6,7 +6,7 @@ LOCAL_IMAGE="${IMAGE_NAME}:${TAG}"
 docker build -f ${DOCKERFILE} -t ${LOCAL_IMAGE} .
 if test $? -eq 0
 then
-    printf "Build done!\n"
+    printf "Build done! You can now start the container as follow:\ndocker run -p 8080:8080 ${LOCAL_IMAGE}\n"
 else
     printf "ERROR building docker image!\n"
 fi

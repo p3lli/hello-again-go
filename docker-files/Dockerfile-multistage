@@ -10,4 +10,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix nocgo -o /app
 FROM alpine:latest
 WORKDIR /root/
 COPY --from=builder /app .
+EXPOSE 8080
 CMD ["./app"]
