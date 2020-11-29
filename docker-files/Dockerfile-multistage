@@ -1,4 +1,7 @@
 FROM golang:1.15 as builder
+ARG BUILD_ID
+ENV BUILD_ID=$BUILD_ID
+LABEL build=$BUILD_ID
 RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.33.0
 WORKDIR $GOPATH/src/
 COPY . hello-again-go/
