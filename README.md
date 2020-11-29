@@ -29,3 +29,8 @@ curl "http://localhost:8080/image?text=go" --output go.png
 ```
 
 ![Go image](go.png)
+
+### Docker
+
+Muli-stage build is used. See `docker-files` directory.  
+Use `./build.sh` to automatically build the docker image.  

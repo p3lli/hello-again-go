@@ -1,0 +1,11 @@
+FROM golang:1.15 as builder
+WORKDIR $GOPATH/src/
+COPY . hello-again-go/
+WORKDIR $GOPATH/src/hello-again-go/
+RUN go test ./...
+RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix nocgo -o /app
+
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /app .
+CMD ["./app"]
