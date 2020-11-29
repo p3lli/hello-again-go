@@ -1,0 +1,3 @@
+#!/bin/sh
+go test ./...
+go run main.go
