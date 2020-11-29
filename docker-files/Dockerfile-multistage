@@ -1,7 +1,9 @@
 FROM golang:1.15 as builder
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.33.0
 WORKDIR $GOPATH/src/
 COPY . hello-again-go/
 WORKDIR $GOPATH/src/hello-again-go/
+RUN golangci-lint run; exit 0
 RUN go test ./...
 RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix nocgo -o /app
 
