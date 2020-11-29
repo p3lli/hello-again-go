@@ -18,3 +18,7 @@ main
 
 .idea
 *.iml
+
+# Images, except example
+!go.png
+*.png
