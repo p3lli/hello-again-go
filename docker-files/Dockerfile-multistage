@@ -3,7 +3,7 @@ RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master
 WORKDIR $GOPATH/src/
 COPY . hello-again-go/
 WORKDIR $GOPATH/src/hello-again-go/
-RUN golangci-lint run; exit 0
+RUN golangci-lint run; exit 0 # this is still a dirty hack to continue execution after code quality check
 RUN go test ./...
 RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix nocgo -o /app
 

@@ -35,7 +35,7 @@ curl "http://localhost:8080/image?text=go" --output go.png
 Muli-stage build is used. See `docker-files` directory.  
 Use `./build.sh` to automatically build the docker image. 
 
-#### `golangcli`
+#### `golangcli-lint`
 During docker image building, before the tests run  
 I have added `golangcli-lint` for the first time  
 as code quality measurement.  
