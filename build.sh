@@ -8,7 +8,7 @@ docker build --build-arg BUILD_ID=${BUILD_ID} -f ${DOCKERFILE} -t ${LOCAL_IMAGE}
 if test $? -eq 0
 then
     printf "Build done! You can now start the container as follow:\ndocker run -p 8080:8080 ${LOCAL_IMAGE}\n"
-    docker image prune --force --filter label=build=${BUILD_ID}
 else
     printf "ERROR building docker image!\n"
 fi
+docker image prune --force --filter label=build=${BUILD_ID}
