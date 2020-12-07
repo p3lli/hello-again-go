@@ -6,9 +6,10 @@ import (
 	"hello-again-go/config"
 	"image"
 	"image/png"
-	"log"
 	"net/http"
 	"strconv"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // Encoder encodes an image and puts it in the response writer
@@ -38,12 +39,18 @@ func (PNGEncoder) WriteImage(w http.ResponseWriter, img *image.Image) {
 
 	buffer := new(bytes.Buffer)
 	if err := png.Encode(buffer, *img); err != nil {
-		log.Println("unable to encode image.")
+		log.WithFields(
+			log.Fields{
+				"error": err.Error(),
+			}).Errorf("Unable to encode image: %s", err.Error())
 	}
 
 	w.Header().Set("Content-Type", "image/png")
 	w.Header().Set("Content-Length", strconv.Itoa(len(buffer.Bytes())))
 	if _, err := w.Write(buffer.Bytes()); err != nil {
-		log.Println("unable to write image.")
+		log.WithFields(
+			log.Fields{
+				"error": err.Error(),
+			}).Errorf("Unable to write image: %s", err.Error())
 	}
 }

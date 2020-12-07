@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"hello-again-go/config"
 	"hello-again-go/service/draw"
-	"log"
 	"net/http"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // RequestHandler defines an interface for request handler
@@ -49,12 +50,19 @@ func (r HTTPRequestHandler) RespondImage(w http.ResponseWriter, req *http.Reques
 	query := req.URL.Query()
 	text, ok := query["text"]
 	if !ok {
-		log.Print(fmt.Errorf("Query param 'text' not provided"))
+		log.WithFields(
+			log.Fields{
+				"error": "Query param 'text' not provided",
+			}).Error("Query param 'text' not provided")
 		return
 	}
 	img, err := r.drawer.DrawText(strings.Join(text, ""))
 	if err != nil {
-		panic(err)
+		log.WithFields(
+			log.Fields{
+				"error": err.Error(),
+			}).Errorf("Error during text '%s' drawing: %s", text, err.Error())
+		return
 	}
 	r.encoder.WriteImage(w, &img)
 }
