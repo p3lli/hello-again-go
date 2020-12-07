@@ -54,6 +54,8 @@ func (r HTTPRequestHandler) RespondImage(w http.ResponseWriter, req *http.Reques
 			log.Fields{
 				"error": "Query param 'text' not provided",
 			}).Error("Query param 'text' not provided")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("400 - Query param 'text' not provided"))
 		return
 	}
 	img, err := r.drawer.DrawText(strings.Join(text, ""))
@@ -62,6 +64,8 @@ func (r HTTPRequestHandler) RespondImage(w http.ResponseWriter, req *http.Reques
 			log.Fields{
 				"error": err.Error(),
 			}).Errorf("Error during text '%s' drawing: %s", text, err.Error())
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(fmt.Sprintf("400 - Error during text '%s' drawing", text)))
 		return
 	}
 	r.encoder.WriteImage(w, &img)

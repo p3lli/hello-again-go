@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	log.Printf("System loading...")
+	log.Println("System loading...")
 	conf, err := config.LoadConfig()
 	if err != nil {
 		log.WithFields(
@@ -27,7 +27,7 @@ func main() {
 			}).Errorf("Error during handler initialization: %s", err.Error())
 	}
 	http.HandleFunc("/image", handler.RespondImage)
-	log.Print("System ready! Waiting instructions...")
+	log.Println("System ready! Waiting instructions...")
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", conf.Port), nil); err != nil {
 		log.WithFields(
 			log.Fields{
